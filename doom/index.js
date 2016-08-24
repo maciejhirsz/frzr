@@ -10,15 +10,23 @@ export function el(tag, attributes) {
     if (attributes != null && attributes.constructor === Object) {
         i = 2;
 
+        var value;
         for (var attribute in attributes) {
-            el.setAttribute(attribute, attributes[attribute]);
+            value = attributes[attribute];
+            switch (attribute) {
+                case 'class' : el.className = value; break;
+                case 'id'    : el.id        = value; break;
+                case 'name'  : el.name      = value; break;
+                case 'src'   : el.src       = value; break;
+                default      : el.setAttribute(attribute, value);
+            }
         }
 
         if (len === 2) return el;
     }
 
     var content = arguments[i++];
-    if (content.constructor === String) {
+    if (content && !content.nodeType) {
         el.textContent = content;
     } else {
         mount(el, content);
