@@ -9,6 +9,7 @@
     "deploy": "gh-pages -d dist",
     "build": "npm run test && npm run build-js && npm run uglify",
     "build-js": "rollup -n frzr -f umd src/index.js -o dist/frzr.js",
+    "build-bench": "rollup -n bench -f iife bench/src/index.js -o bench/build.js",
     "uglify": "uglifyjs dist/frzr.js -cmo dist/frzr.min.js",
     "postversion": "git push --tags",
     "prepublish": "npm test",
